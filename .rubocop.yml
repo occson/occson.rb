@@ -1,0 +1,19 @@
+LineLength:
+  Max: 125
+
+StringLiterals:
+  EnforcedStyle: single_quotes
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Documentation:
+  Enabled: false
+
+AllCops:
+  Exclude:
+    - bin/**/*
+    - Gemfile
+    - Rakefile
+    - ccs.gemspec
+
