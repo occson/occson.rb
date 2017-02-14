@@ -11,6 +11,7 @@ Gem::Specification.new do |spec|
   spec.description   = ''
   spec.homepage      = 'https://github.com/pipello/ccs'
   spec.license       = 'MIT'
+  spec.executables   << 'ccs'
   spec.files         = Dir['CHANGELOG.md', 'CODE_OF_CONDUCT.md', 'LICENSE.txt', 'README.md', 'lib/**/*']
   spec.require_paths = ['lib']
   spec.add_development_dependency 'bundler', '~> 1.13'

@@ -1,0 +1,57 @@
+#!/usr/bin/env ruby
+
+require 'ccs'
+require 'optparse'
+require 'io/console'
+
+options = {}
+
+opt_parser = OptionParser.new do |opt|
+  opt.banner = 'Usage: ccs [OPTIONS] <CCSUri> <LocalPath|STDOUT>'
+  opt.separator  ''
+  opt.separator  'Options:'
+
+  opt.on('-t TOKEN', '--token TOKEN', String, 'API Token') do |v|
+    options[:token] = v
+  end
+
+  opt.on('-d', '--decrypt', 'Ask for passphrase and decrypt') do |v|
+    options[:decrypt] = v
+  end
+
+  opt.on('-h','--help', 'help') do
+    puts opt_parser
+  end
+
+  opt.separator  ''
+  opt.separator  'Examples:'
+  opt.separator  '    ccs -t 8b5a196e-a116-4c64-8472-f7c6e1c2de3b ccs://0.1.0/path/to/file.yml'
+  opt.separator  '    ccs -t 8b5a196e-a116-4c64-8472-f7c6e1c2de3b ccs://0.1.0/path/to/file.yml local/path/to/file.yml'
+
+  opt.separator  ''
+  opt.separator  format('Version: %s', Ccs::VERSION)
+end
+
+arguments = opt_parser.parse!
+
+if ARGV.empty?
+  puts opt_parser
+  exit(-1)
+end
+
+raise OptionParser::MissingArgument if options[:token].nil?
+raise OptionParser::MissingArgument if arguments[0].nil?
+
+configuration_file = Ccs::ConfigurationFile.new(arguments[0])
+destination = arguments[1] ? File.new(arguments[1], 'w') : STDOUT
+
+json = Ccs::Downloader.new(options[:token], configuration_file).download
+
+if options[:decrypt]
+  print 'Passphrase: '
+  passphrase = STDIN.noecho(&:gets)
+
+  destination.puts Ccs::Decrypter.new(passphrase.chomp, json['encrypted_content']).decrypt
+else
+  destination.puts json['encrypted_content']
+end
