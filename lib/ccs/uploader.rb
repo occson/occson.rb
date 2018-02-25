@@ -1,20 +1,17 @@
 # frozen_string_literal: true
 
 module Ccs
-  class Downloader
-    def initialize(uri, access_token, secret_token)
+  class Uploader
+    def initialize(uri, content, access_token, secret_token)
       @uri = uri
+      @content = content
       @access_token = access_token
       @secret_token = secret_token
     end
 
     def call
-      response = http.request(request)
-      body = response.body
-      return unless response.code.eql? '200'
-      json = JSON.parse body
-
-      Decrypter.new(@secret_token, json['encrypted_content']).call
+      request.body = { encrypted_content: encrypted_content }.to_json
+      http.request(request).code.eql? '201'
     end
 
     private
@@ -24,7 +21,7 @@ module Ccs
     end
 
     def request
-      Net::HTTP::Get.new(@uri.path, headers)
+      @request ||= Net::HTTP::Post.new(@uri.path, headers)
     end
 
     def headers
@@ -32,6 +29,14 @@ module Ccs
         'Authorization' => format('Token token=%<access_token>s', access_token: @access_token),
         'Content-Type' => 'application/json'
       }
+    end
+
+    def encrypted_content
+      @encrypted_content ||= Encrypter.new(@secret_token, @content, salt).call
+    end
+
+    def salt
+      @access_token[0...8]
     end
   end
 end

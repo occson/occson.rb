@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Ccs
   class Decrypter
     def initialize(passphrase, content)
@@ -5,7 +7,7 @@ module Ccs
       @content = content
     end
 
-    def decrypt
+    def call
       decryptor.pkcs5_keyivgen(@passphrase, ciphertext_salt, 1)
       result = decryptor.update(encrypted)
       result << decryptor.final

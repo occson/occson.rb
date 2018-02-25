@@ -1,0 +1,8 @@
+version: '3'
+services:
+  fake_occson:
+    build: ./.docker/fake_occson
+    ports:
+      - 9292:9292
+    environment:
+      - CCS_ACCESS_TOKEN=ewCawighr566GXEUkz

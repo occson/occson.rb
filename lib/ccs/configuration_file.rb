@@ -1,29 +1,25 @@
+# frozen_string_literal: true
+
 module Ccs
   class ConfigurationFile
-    def initialize(uri)
-      @uri = uri
+    def initialize(uri, access_token, secret_token)
+      @uri = build_uri(uri)
+      @access_token = access_token
+      @secret_token = secret_token
     end
 
-    def version
-      parts[0]
+    def upload(content)
+      Uploader.new(@uri, content, @access_token, @secret_token).call
     end
 
-    def path
-      parts[1]
-    end
-
-    def to_path
-      Pathname.new path
-    end
-
-    def to_s
-      format 'ccs://%s/%s', version, path
+    def download
+      Downloader.new(@uri, @access_token, @secret_token).call
     end
 
     private
 
-    def parts
-      @parts ||= @uri.sub('ccs://', '').split('/', 2)
+    def build_uri(uri)
+      URI uri.sub('ccs://', 'https://api.occson.com/')
     end
   end
 end
