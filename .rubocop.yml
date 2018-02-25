@@ -1,19 +1,14 @@
-LineLength:
+AllCops:
+  TargetRubyVersion: 2.5
+  Exclude:
+    - bin/*
+Metrics/LineLength:
   Max: 125
 
-StringLiterals:
-  EnforcedStyle: single_quotes
-
-Style/FrozenStringLiteralComment:
+Style/Documentation:
   Enabled: false
 
-Documentation:
-  Enabled: false
-
-AllCops:
+Metrics/BlockLength:
   Exclude:
-    - bin/**/*
-    - Gemfile
-    - Rakefile
+    - spec/**/*.rb
     - ccs.gemspec
-
