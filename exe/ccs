@@ -23,22 +23,18 @@ option_parser.on('-c CONFIGURATION', '--configuration CONFIGURATION', String, 'P
   options['configuration'] = v
 end
 
-option_parser.on('-t CCS ACCESS TOKEN', '--access-token CCS ACCESS TOKEN', String, 'CCS Access Token') do |v|
+option_parser.on('-a CCS_ACCESS_TOKEN', '--access-token CCS_ACCESS_TOKEN', String, 'CCS Access Token') do |v|
   options['access_token'] = v
 end
 
-option_parser.on('-s CCS SECRET TOKEN', '--secret-token CCS SECRET TOKEN', String, 'CCS Secret Token') do |v|
+option_parser.on('-s CCS_SECRET_TOKEN', '--secret-token CCS_SECRET_TOKEN', String, 'CCS Secret Token') do |v|
   options['secret_token'] = v
 end
 
 option_parser.separator  ''
-option_parser.separator  'Configure via environemnt variables'
+option_parser.separator  'Configure via environment variables'
 option_parser.separator  '  CCS_ACCESS_TOKEN'
 option_parser.separator  '  CCS_SECRET_TOKEN'
-option_parser.separator  ''
-option_parser.separator  'Configuration via file (.ccs.yml)'
-option_parser.separator  '  access_token: [CCS_ACCESS_TOKEN]'
-option_parser.separator  '  secret_token: [CCS_SECRET_TOKEN]'
 
 option_parser.separator  ''
 option_parser.separator  'Examples:'
