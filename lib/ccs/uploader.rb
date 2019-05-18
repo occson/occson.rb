@@ -17,7 +17,9 @@ module Ccs
     private
 
     def http
-      Net::HTTP.new(@uri.host, @uri.port)
+      @http ||= Net::HTTP.new(@uri.host, @uri.port).tap do |http|
+        http.use_ssl = true if @uri.scheme.eql?('https')
+      end
     end
 
     def request
