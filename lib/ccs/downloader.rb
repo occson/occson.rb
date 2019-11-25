@@ -21,12 +21,14 @@ module Ccs
 
     def http
       @http ||= Net::HTTP.new(@uri.host, @uri.port).tap do |http|
-        http.use_ssl = true if @uri.scheme.eql?('https')
+        http.use_ssl = @uri.scheme.eql?('https')
       end
     end
 
     def request
-      Net::HTTP::Get.new(@uri.path, headers)
+      Net::HTTP::Get.new(@uri.path, headers).tap do |request|
+        request["User-Agent"] = format('ccs/%s', Ccs::VERSION)
+      end
     end
 
     def headers
