@@ -17,7 +17,7 @@ Gem::Specification.new do |spec|
   spec.executables << 'ccs'
   spec.files = Dir['CHANGELOG.md', 'CODE_OF_CONDUCT.md', 'LICENSE.txt', 'README.md', 'lib/**/*']
   spec.require_paths = ['lib']
-  spec.add_development_dependency 'inch', '~> 0.7.1'
+  spec.add_development_dependency 'inch', '~> 0.8.0'
   spec.add_development_dependency 'pry', '~> 0.11.3'
   spec.add_development_dependency 'rake', '~> 12.3.0'
   spec.add_development_dependency 'reek', '~> 4.7.3'
@@ -25,5 +25,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rubocop', '~> 0.52.1'
   spec.add_development_dependency 'simplecov', '~> 0.15.1'
   spec.add_development_dependency 'webmock', '~> 3.3.0'
-  spec.add_development_dependency 'yard', '~> 0.8.7.5'
+  spec.add_development_dependency 'yard', '>= 0.9.11'
 end
