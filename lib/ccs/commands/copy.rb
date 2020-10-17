@@ -21,7 +21,7 @@ module Ccs
       end
 
       def download
-        content = ConfigurationFile.new(@source, @access_token, @secret_token).download
+        content = Document.new(@source, @access_token, @secret_token).download
         return unless content
 
         (@destination.eql?('-') ? STDOUT : File.new(@destination, 'w')).print content
@@ -29,7 +29,7 @@ module Ccs
 
       def upload
         content = @source.eql?('-') ? STDIN.read : File.read(@source)
-        ConfigurationFile.new(@destination, @access_token, @secret_token).upload(content)
+        Document.new(@destination, @access_token, @secret_token).upload(content)
       end
     end
   end

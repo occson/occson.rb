@@ -4,7 +4,7 @@ require 'rack'
 require 'fileutils'
 require 'json'
 
-class ConfigurationFile
+class Document
   def initialize(path)
     @path = File.join('/fake_occson', path)
   end
@@ -30,19 +30,19 @@ class Application
 
     request = Rack::Request.new(env)
 
-    configuration_file = ConfigurationFile.new(request.path_info)
+    document = Document.new(request.path_info)
 
     if request.post?
-      return conflict if configuration_file.exist?
+      return conflict if document.exist?
       json = JSON.parse(request.body.read)
 
-      configuration_file.write json['encrypted_content']
+      document.write json['encrypted_content']
 
       [201, { 'Content-Type' => 'application/json' }, [{ message: 'Created', status: 201 }.to_json]]
     elsif request.get?
-      return not_found unless configuration_file.exist?
+      return not_found unless document.exist?
 
-      content = configuration_file.read
+      content = document.read
 
       [200, { 'Content-Type' => 'application/json' }, [{ message: 'OK', status: 200, encrypted_content: content }.to_json]]
     else

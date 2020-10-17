@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-RSpec.describe Ccs::ConfigurationFile do
-  let(:configuration_file) { described_class.new uri, access_token, secret_token }
+RSpec.describe Ccs::Document do
+  let(:document) { described_class.new uri, access_token, secret_token }
 
-  subject { configuration_file }
+  subject { document }
 
   let(:access_token) { 'access_token' }
   let(:secret_token) { 'secret_token' }

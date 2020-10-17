@@ -11,7 +11,7 @@ require 'ccs/encrypter'
 require 'ccs/decrypter'
 require 'ccs/uploader'
 require 'ccs/downloader'
-require 'ccs/configuration_file'
+require 'ccs/document'
 require 'ccs/commands/copy'
 
 module Ccs; end

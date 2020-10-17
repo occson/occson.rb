@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Ccs
-  class ConfigurationFile
+  class Document
     def initialize(uri, access_token, secret_token)
       @uri = build_uri(uri)
       @access_token = access_token

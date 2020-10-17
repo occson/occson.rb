@@ -61,7 +61,7 @@ Upload
     secret_token = 'MySecretToken'
     content = 'RAILS_ENV=production'
 
-    Ccs::ConfigurationFile.new(destination, access_token, secret_token).upload(content)
+    Ccs::Document.new(destination, access_token, secret_token).upload(content)
 
 Download
 
@@ -71,7 +71,7 @@ Download
     access_token = ENV.fetch('CCS_ACCESS_TOKEN')
     secret_token = 'MySecretToken'
 
-    Ccs::ConfigurationFile.new(source, access_token, secret_token).download
+    Ccs::Document.new(source, access_token, secret_token).download
 
 ## Development
 
