@@ -7,7 +7,10 @@ require 'yaml'
 require 'optparse'
 require 'io/console'
 
-options = {}
+options = {
+  'access_token' => ENV['CCS_ACCESS_TOKEN'],
+  'secret_token' => ENV['CCS_SECRET_TOKEN']
+}
 
 option_parser = OptionParser.new do |option_parser|
   option_parser.banner = 'Usage: ccs [COMMAND [OPTIONS]]'
@@ -38,6 +41,11 @@ when 'cp'
     option_parser.on('-s CCS_SECRET_TOKEN', '--secret-token CCS_SECRET_TOKEN', String, 'CCS Secret Token') do |v|
       options['secret_token'] = v
     end
+
+    option_parser.separator ''
+    option_parser.separator 'Configure via environment variables:'
+    option_parser.separator '  CCS_ACCESS_TOKEN'
+    option_parser.separator '  CCS_SECRET_TOKEN'
 
     option_parser.separator ''
     option_parser.separator 'Examples:'
