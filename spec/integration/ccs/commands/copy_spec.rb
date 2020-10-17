@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Ccs::Application do
+RSpec.describe Ccs::Commands::Copy do
   let(:application) { described_class.new source, destination, access_token, secret_token }
 
   subject { application }
@@ -20,14 +20,14 @@ RSpec.describe Ccs::Application do
                  headers: { 'Content-Type' => 'application/json' })
   end
 
-  describe '#run' do
+  describe '#call' do
     context 'when downloads' do
       let(:source) { 'http://example.com/a/b/c.txt' }
 
       context 'to STDOUT' do
         let(:destination) { '-' }
 
-        it { expect { subject.run }.to output('content').to_stdout_from_any_process }
+        it { expect { subject.call }.to output('content').to_stdout_from_any_process }
       end
 
       context 'to file' do
@@ -37,7 +37,7 @@ RSpec.describe Ccs::Application do
         before { allow(File).to receive(:new).and_return(io) }
 
         it 'prints content to file' do
-          expect(subject.run).to eq nil
+          expect(subject.call).to eq nil
           io.rewind
           expect(io.read).to eq 'content'
         end
@@ -51,13 +51,13 @@ RSpec.describe Ccs::Application do
         before { STDIN = StringIO.new('content') }
         let(:source) { '-' }
 
-        it { expect(subject.run).to eq true }
+        it { expect(subject.call).to eq true }
       end
 
       context 'from file' do
         let(:source) { 'spec/fixtures/fake_file.txt' }
 
-        it { expect(subject.run).to eq true }
+        it { expect(subject.call).to eq true }
       end
     end
   end

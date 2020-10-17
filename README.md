@@ -1,5 +1,6 @@
 # CCS
 
+Configuration control system
 
 ## Installation
 
@@ -19,7 +20,58 @@ Or install it yourself as:
 
 ## Usage
 
+    ccs cp [OPTIONS] <(LocalPath|STDIN)|(CCSUri|Uri)> <(CCSUri|Uri)|(LocalPath|STDOUT)>
+
+    Options:
+        -a CCS_ACCESS_TOKEN,             CCS Access Token
+            --access-token
+        -s CCS_SECRET_TOKEN,             CCS Secret Token
+            --secret-token
+
+
 ## Example
+
+Download to STDOUT
+
+    ccs cp ccs://workspace-name/0.1.0/path/to/file.yml -
+    ccs cp http://host.tld:9292/workspace-name/0.1.0/path/to/file.yml -
+    ccs cp https://host.tld/workspace-name/0.1.0/path/to/file.yml -
+
+Download to local file
+
+    ccs cp ccs://workspace-name/0.1.0/path/to/file.yml /local/path/to/file.yml
+
+Upload local file
+
+    ccs cp /local/path/to/file.yml ccs://workspace-name/0.1.0/path/to/file.yml
+
+Upload content from STDIN
+
+    echo "{ a: 1 }" | ccs cp  - ccs://workspace-name/0.1.0/path/to/file.yml
+    cat /local/path/to/file.yml | ccs cp - ccs://workspace-name/0.1.0/path/to/file.yml
+
+## API
+
+Upload
+
+    require 'ccs'
+
+    destination = 'ccs://workspace-name/0.1.0/path/to/file.yml'
+    access_token = ENV.fetch('CCS_ACCESS_TOKEN')
+    secret_token = 'MySecretToken'
+    content = 'RAILS_ENV=production'
+
+    Ccs::ConfigurationFile.new(destination, access_token, secret_token).upload(content)
+
+Download
+
+    require 'ccs'
+
+    source = 'ccs://workspace-name/0.1.0/path/to/file.yml'
+    access_token = ENV.fetch('CCS_ACCESS_TOKEN')
+    secret_token = 'MySecretToken'
+
+    Ccs::ConfigurationFile.new(source, access_token, secret_token).download
 
 ## Development
 
