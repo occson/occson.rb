@@ -7,11 +7,11 @@ require 'ccs/version'
 Gem::Specification.new do |spec|
   spec.name = 'ccs'
   spec.version = Ccs::VERSION
-  spec.authors = ['tkowalewski']
-  spec.email = ['me@tkowalewski.pl']
+  spec.authors = ['tkowalewski', 'paweljw']
+  spec.email = ['me@tkowalewski.pl', 'p@steamshard.net']
   spec.summary = 'Configuration Control System (CCS)'
   spec.description = ''
-  spec.homepage = 'https://github.com/tkowalewski/ccs'
+  spec.homepage = 'https://github.com/occson/ccs'
   spec.license = 'MIT'
   spec.bindir = 'exe'
   spec.executables << 'ccs'
