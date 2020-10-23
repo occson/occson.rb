@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ccs (2.0.0)
+    ccs (3.0.0)
 
 GEM
   remote: https://rubygems.org/
