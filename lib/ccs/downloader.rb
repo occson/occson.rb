@@ -2,10 +2,10 @@
 
 module Ccs
   class Downloader
-    def initialize(uri, access_token, secret_token)
+    def initialize(uri, access_token, passphrase)
       @uri = uri
       @access_token = access_token
-      @secret_token = secret_token
+      @passphrase = passphrase
     end
 
     def call
@@ -14,7 +14,7 @@ module Ccs
       return unless response.code.eql? '200'
       json = JSON.parse body
 
-      Decrypter.new(@secret_token, json['encrypted_content']).call
+      Decrypter.new(@passphrase, json['encrypted_content']).call
     end
 
     private

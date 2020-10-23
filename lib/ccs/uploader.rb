@@ -2,11 +2,11 @@
 
 module Ccs
   class Uploader
-    def initialize(uri, content, access_token, secret_token)
+    def initialize(uri, content, access_token, passphrase)
       @uri = uri
       @content = content
       @access_token = access_token
-      @secret_token = secret_token
+      @passphrase = passphrase
     end
 
     def call
@@ -36,7 +36,7 @@ module Ccs
     end
 
     def encrypted_content
-      @encrypted_content ||= Encrypter.new(@secret_token, @content, salt).call
+      @encrypted_content ||= Encrypter.new(@passphrase, @content, salt).call
     end
 
     def salt

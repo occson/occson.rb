@@ -6,10 +6,10 @@ RSpec.describe Ccs::Encrypter do
   subject { encrypter }
 
   describe '#call' do
-    let(:passphrase) { 'secret_token' }
+    let(:passphrase) { 'passphrase' }
     let(:content) { 'content' }
     let(:salt) { 'secret_t' }
 
-    it { expect(subject.call).to eq 'U2FsdGVkX19zZWNyZXRfdAysfeMlKF4wGAULx3axRnM=' }
+    it { expect(subject.call).to eq 'U2FsdGVkX19zZWNyZXRfdDngaQw8zQbHado/FhnBIsQ=' }
   end
 end

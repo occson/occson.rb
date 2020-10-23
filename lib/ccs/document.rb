@@ -2,18 +2,18 @@
 
 module Ccs
   class Document
-    def initialize(uri, access_token, secret_token)
+    def initialize(uri, access_token, passphrase)
       @uri = build_uri(uri)
       @access_token = access_token
-      @secret_token = secret_token
+      @passphrase = passphrase
     end
 
     def upload(content)
-      Uploader.new(@uri, content, @access_token, @secret_token).call
+      Uploader.new(@uri, content, @access_token, @passphrase).call
     end
 
     def download
-      Downloader.new(@uri, @access_token, @secret_token).call
+      Downloader.new(@uri, @access_token, @passphrase).call
     end
 
     private

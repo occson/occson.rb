@@ -6,8 +6,8 @@ RSpec.describe Ccs::Decrypter do
   subject { decrypter }
 
   describe '#call' do
-    let(:passphrase) { 'secret_token' }
-    let(:content) { 'U2FsdGVkX19zZWNyZXRfdAysfeMlKF4wGAULx3axRnM=' }
+    let(:passphrase) { 'passphrase' }
+    let(:content) { 'U2FsdGVkX19zZWNyZXRfdDngaQw8zQbHado/FhnBIsQ='}
 
     it { expect(subject.call).to eq 'content' }
   end
