@@ -9,7 +9,7 @@ require 'io/console'
 
 options = {
   'access_token' => ENV['CCS_ACCESS_TOKEN'],
-  'secret_token' => ENV['CCS_SECRET_TOKEN']
+  'passphrase' => ENV['CCS_PASSPHRASE']
 }
 
 option_parser = OptionParser.new do |option_parser|
@@ -38,14 +38,14 @@ when 'cp'
       options['access_token'] = v
     end
 
-    option_parser.on('-s CCS_SECRET_TOKEN', '--secret-token CCS_SECRET_TOKEN', String, 'CCS Secret Token') do |v|
-      options['secret_token'] = v
+    option_parser.on('-p CCS_PASSPHRASE', '--passphrase CCS_PASSPHRASE', String, 'CCS Passphrase') do |v|
+      options['passphrase'] = v
     end
 
     option_parser.separator ''
     option_parser.separator 'Configure via environment variables:'
     option_parser.separator '  CCS_ACCESS_TOKEN'
-    option_parser.separator '  CCS_SECRET_TOKEN'
+    option_parser.separator '  CCS_PASSPHRASE'
 
     option_parser.separator ''
     option_parser.separator 'Examples:'
@@ -73,11 +73,11 @@ when 'cp'
   end
 
   raise OptionParser::MissingArgument, 'access_token' unless options['access_token']
-  raise OptionParser::MissingArgument, 'secret_token' unless options['secret_token']
+  raise OptionParser::MissingArgument, 'passphrase' unless options['passphrase']
   raise OptionParser::MissingArgument, 'source' unless arguments.fetch(0, nil)
   raise OptionParser::MissingArgument, 'destination' unless arguments.fetch(1, nil)
 
-  exit(1) unless Ccs::Commands::Copy.new(arguments[0], arguments[1], options['access_token'], options['secret_token']).call
+  exit(1) unless Ccs::Commands::Copy.new(arguments[0], arguments[1], options['access_token'], options['passphrase']).call
 else
   puts option_parser
   exit(1)

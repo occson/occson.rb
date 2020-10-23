@@ -3,11 +3,11 @@
 module Ccs
   module Commands
     class Copy
-      def initialize(source, destination, access_token, secret_token)
+      def initialize(source, destination, access_token, passphrase)
         @source = source
         @destination = destination
         @access_token = access_token
-        @secret_token = secret_token
+        @passphrase = passphrase
       end
 
       def call
@@ -21,7 +21,7 @@ module Ccs
       end
 
       def download
-        content = Document.new(@source, @access_token, @secret_token).download
+        content = Document.new(@source, @access_token, @passphrase).download
         return unless content
 
         (@destination.eql?('-') ? STDOUT : File.new(@destination, 'w')).print content
@@ -29,7 +29,7 @@ module Ccs
 
       def upload
         content = @source.eql?('-') ? STDIN.read : File.read(@source)
-        Document.new(@destination, @access_token, @secret_token).upload(content)
+        Document.new(@destination, @access_token, @passphrase).upload(content)
       end
     end
   end

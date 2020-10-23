@@ -1,18 +1,18 @@
 # frozen_string_literal: true
 
 RSpec.describe Ccs::Commands::Copy do
-  let(:application) { described_class.new source, destination, access_token, secret_token }
+  let(:application) { described_class.new source, destination, access_token, passphrase }
 
   subject { application }
 
   let(:access_token) { 'access_token' }
-  let(:secret_token) { 'secret_token' }
+  let(:passphrase) { 'passphrase' }
 
   before do
     stub_request(:get, 'http://example.com/a/b/c.txt')
       .to_return(status: 200,
                  body: { message: 'OK', status: '200',
-                         encrypted_content: 'U2FsdGVkX19zZWNyZXRfdAysfeMlKF4wGAULx3axRnM=' }.to_json,
+                         encrypted_content: 'U2FsdGVkX19zZWNyZXRfdDngaQw8zQbHado/FhnBIsQ=' }.to_json,
                  headers: { 'Content-Type' => 'application/json' })
     stub_request(:post, 'http://example.com/a/b/c.txt')
       .to_return(status: 201,

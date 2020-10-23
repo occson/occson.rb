@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Ccs::Uploader do
-  let(:uploader) { described_class.new uri, content, access_token, secret_token }
+  let(:uploader) { described_class.new uri, content, access_token, passphrase }
 
   subject { uploader }
 
@@ -25,7 +25,7 @@ RSpec.describe Ccs::Uploader do
     let(:uri) { URI 'http://example.com/a/b/c.yml' }
     let(:content) { 'content' }
     let(:access_token) { 'access_token' }
-    let(:secret_token) { 'secret_token' }
+    let(:passphrase) { 'passphrase' }
 
     it { expect(subject.call).to eq true }
 

@@ -25,8 +25,8 @@ Or install it yourself as:
     Options:
         -a CCS_ACCESS_TOKEN,             CCS Access Token
             --access-token
-        -s CCS_SECRET_TOKEN,             CCS Secret Token
-            --secret-token
+        -p CCS_PASSPHRASE,               CCS Passphrase
+            --passphrase
 
 
 ## Example
@@ -58,10 +58,10 @@ Upload
 
     destination = 'ccs://workspace-name/0.1.0/path/to/file.yml'
     access_token = ENV.fetch('CCS_ACCESS_TOKEN')
-    secret_token = 'MySecretToken'
+    passphrase = 'MyPassphrase'
     content = 'RAILS_ENV=production'
 
-    Ccs::Document.new(destination, access_token, secret_token).upload(content)
+    Ccs::Document.new(destination, access_token, passphrase).upload(content)
 
 Download
 
@@ -69,9 +69,9 @@ Download
 
     source = 'ccs://workspace-name/0.1.0/path/to/file.yml'
     access_token = ENV.fetch('CCS_ACCESS_TOKEN')
-    secret_token = 'MySecretToken'
+    passphrase = 'MyPassphrase'
 
-    Ccs::Document.new(source, access_token, secret_token).download
+    Ccs::Document.new(source, access_token, passphrase).download
 
 ## Development
 
