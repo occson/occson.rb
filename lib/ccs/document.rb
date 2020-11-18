@@ -8,8 +8,8 @@ module Ccs
       @passphrase = passphrase
     end
 
-    def upload(content)
-      Uploader.new(@uri, content, @access_token, @passphrase).call
+    def upload(content, force: false)
+      Uploader.new(@uri, content, @access_token, @passphrase, force: force).call
     end
 
     def download

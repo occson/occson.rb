@@ -2,16 +2,17 @@
 
 module Ccs
   class Uploader
-    def initialize(uri, content, access_token, passphrase)
+    def initialize(uri, content, access_token, passphrase, force: false)
       @uri = uri
       @content = content
       @access_token = access_token
       @passphrase = passphrase
+      @force = force.to_s
     end
 
     def call
-      request.body = { encrypted_content: encrypted_content }.to_json
-      http.request(request).code.eql? '201'
+      request.body = { encrypted_content: encrypted_content, force: @force }.to_json
+      %w[200 201].include?(http.request(request).code)
     end
 
     private

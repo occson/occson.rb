@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Ccs::Uploader do
-  let(:uploader) { described_class.new uri, content, access_token, passphrase }
+  let(:uploader) { described_class.new uri, content, access_token, passphrase, force: force }
 
   subject { uploader }
 
@@ -16,8 +16,14 @@ RSpec.describe Ccs::Uploader do
                  body: { message: 'Unauthorized', status: '401' }.to_json,
                  headers: { 'Content-Type' => 'application/json' })
     stub_request(:post, 'http://example.com/a/b/d.yml')
+      .with(body: a_string_including('"force":"false"'))
       .to_return(status: 409,
                  body: { message: 'Conflict', status: '409' }.to_json,
+                 headers: { 'Content-Type' => 'application/json' })
+    stub_request(:post, 'http://example.com/a/b/d.yml')
+      .with(body: a_string_including('"force":"true"'))
+      .to_return(status: 200,
+                 body: { message: 'Created', status: '200' }.to_json,
                  headers: { 'Content-Type' => 'application/json' })
   end
 
@@ -26,6 +32,7 @@ RSpec.describe Ccs::Uploader do
     let(:content) { 'content' }
     let(:access_token) { 'access_token' }
     let(:passphrase) { 'passphrase' }
+    let(:force) { false }
 
     it { expect(subject.call).to eq true }
 
@@ -35,10 +42,17 @@ RSpec.describe Ccs::Uploader do
       it { expect(subject.call).to eq false }
     end
 
-    context 'when configuration file exist' do
+    context 'when configuration file exist and not forced' do
       let(:uri) { URI 'http://example.com/a/b/d.yml' }
 
       it { expect(subject.call).to eq false }
+    end
+
+    context 'when configuration file exist and forced' do
+      let(:uri) { URI 'http://example.com/a/b/d.yml' }
+      let(:force) { true }
+
+      it { expect(subject.call).to eq true }
     end
   end
 end

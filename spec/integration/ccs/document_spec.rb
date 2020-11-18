@@ -19,11 +19,20 @@ RSpec.describe Ccs::Document do
       .to_return(status: 201,
                  body: { message: 'Created', status: '201' }.to_json,
                  headers: { 'Content-Type' => 'application/json' })
+    stub_request(:post, 'https://api.occson.com/a/b/c.txt')
+      .with(body: a_string_including('"force":"true"'))
+      .to_return(status: 200,
+                 body: { message: 'Created', status: '200' }.to_json,
+                 headers: { 'Content-Type' => 'application/json' })
   end
 
   describe '#upload' do
     context 'with ccs scheme' do
       it { expect(subject.upload('content')).to eq true }
+    end
+
+    context 'with ccs scheme and force' do
+      it { expect(subject.upload('content', force: true)).to eq true }
     end
   end
 

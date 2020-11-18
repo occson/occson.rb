@@ -42,6 +42,10 @@ when 'cp'
       options['passphrase'] = v
     end
 
+    option_parser.on('-f', '--[no-]force', 'Overwrite remote documents when uploading') do |v|
+      options['passphrase'] = v
+    end
+
     option_parser.separator ''
     option_parser.separator 'Configure via environment variables:'
     option_parser.separator '  CCS_ACCESS_TOKEN'
@@ -57,6 +61,8 @@ when 'cp'
     option_parser.separator '    ccs cp ccs://workspace-name/0.1.0/path/to/file.yml /local/path/to/file.yml'
     option_parser.separator '  Upload local file'
     option_parser.separator '    ccs cp /local/path/to/file.yml ccs://workspace-name/0.1.0/path/to/file.yml'
+    option_parser.separator '  Upload local file, overwriting remote document if any'
+    option_parser.separator '    ccs cp --force /local/path/to/file.yml ccs://workspace-name/0.1.0/path/to/file.yml'
     option_parser.separator '  Upload content from STDIN'
     option_parser.separator '    echo "{ a: 1 }" | ccs cp  - ccs://workspace-name/0.1.0/path/to/file.yml'
     option_parser.separator '    cat /local/path/to/file.yml | ccs cp - ccs://workspace-name/0.1.0/path/to/file.yml'
@@ -77,7 +83,7 @@ when 'cp'
   raise OptionParser::MissingArgument, 'source' unless arguments.fetch(0, nil)
   raise OptionParser::MissingArgument, 'destination' unless arguments.fetch(1, nil)
 
-  exit(1) unless Ccs::Commands::Copy.new(arguments[0], arguments[1], options['access_token'], options['passphrase']).call
+  exit(1) unless Ccs::Commands::Copy.new(arguments[0], arguments[1], options['access_token'], options['passphrase'], force: options.fetch('force', false)).call
 else
   puts option_parser
   exit(1)
