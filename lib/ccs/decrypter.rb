@@ -1,12 +1,30 @@
 # frozen_string_literal: true
 
 module Ccs
+  # Handles client-side decryption for documents.
+  #
+  # The decrypter uses AES-256 in CBC mode internally. A salt is
+  # expected in bytes 8..15, with ciphertext occupying the
+  # further bytes.
   class Decrypter
+    # Constructs a Decrypter instance with given passphrase and content.
+    #
+    # @example
+    #
+    #   Ccs::Decrypter.new('the content passphrase', content)
+    #  
+    # @param passphrase [String] Passphrase for content decryption
+    #
+    # @param content [String] Encrypted document content
+    #
     def initialize(passphrase, content)
       @passphrase = passphrase
       @content = content
     end
 
+    # Performs decryption, returning plaintext if passphrase matched.
+    #
+    # @return [String] Plaintext document content
     def call
       decryptor.pkcs5_keyivgen(@passphrase, ciphertext_salt, 1)
       result = decryptor.update(encrypted)

@@ -12,6 +12,8 @@ require 'ccs/decrypter'
 require 'ccs/uploader'
 require 'ccs/downloader'
 require 'ccs/document'
+
 require 'ccs/commands/copy'
 
+# Top level `Ccs` namespace.
 module Ccs; end

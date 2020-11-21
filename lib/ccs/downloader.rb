@@ -1,13 +1,31 @@
 # frozen_string_literal: true
 
 module Ccs
+  # Downloads and decrypts the document at given URI with given access token.
+  # Decryption occurs using given passphrase.
   class Downloader
+    # Constructs a Downloader instance from a given URI, access token and passphrase.
+    #
+    # @example
+    #    uri = 'ccs://path/to/file.yml'
+    #    access_token = 'f30b5450421362c9ca0b'
+    #    passphrase = 'my document passphrase'
+    #
+    #    Ccs::Downloader.new(uri, access_token, passphrase)
+    #
+    # @param uri [String] Document URI. Accepts `ccs://` as shorthand for Occson location.
+    # @param access_token [String] Occson access token.
+    # @param passphrase [String] Document passphrase, used in encryption and decryption.
     def initialize(uri, access_token, passphrase)
       @uri = uri
       @access_token = access_token
       @passphrase = passphrase
     end
 
+    # Performs the download and decryption of document.
+    #
+    # @return [String|nil] Decrypted body of the document or `nil` in case the
+    #   server did not respond with a `200` HTTP code.
     def call
       response = http.request(request)
       body = response.body
