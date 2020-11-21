@@ -45,6 +45,10 @@ Upload local file
 
     ccs cp /local/path/to/file.yml ccs://workspace-name/0.1.0/path/to/file.yml
 
+Upload local file, overwriting remote document if any'
+    
+    ccs cp --force /local/path/to/file.yml ccs://workspace-name/0.1.0/path/to/file.yml
+
 Upload content from STDIN
 
     echo "{ a: 1 }" | ccs cp  - ccs://workspace-name/0.1.0/path/to/file.yml
