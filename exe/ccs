@@ -43,7 +43,7 @@ when 'cp'
     end
 
     option_parser.on('-f', '--[no-]force', 'Overwrite remote documents when uploading') do |v|
-      options['passphrase'] = v
+      options['force'] = v
     end
 
     option_parser.separator ''
