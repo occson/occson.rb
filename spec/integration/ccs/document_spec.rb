@@ -12,17 +12,16 @@ RSpec.describe Ccs::Document do
   before do
     stub_request(:get, 'https://api.occson.com/a/b/c.txt')
       .to_return(status: 200,
-                 body: { message: 'OK', status: '200',
-                         encrypted_content: 'U2FsdGVkX19zZWNyZXRfdDngaQw8zQbHado/FhnBIsQ=' }.to_json,
+                 body: { encrypted_content: 'U2FsdGVkX19zZWNyZXRfdDngaQw8zQbHado/FhnBIsQ=' }.to_json,
                  headers: { 'Content-Type' => 'application/json' })
     stub_request(:post, 'https://api.occson.com/a/b/c.txt')
       .to_return(status: 201,
-                 body: { message: 'Created', status: '201' }.to_json,
+                 body: { encrypted_content: 'U2FsdGVkX19zZWNyZXRfdDngaQw8zQbHado/FhnBIsQ=' }.to_json,
                  headers: { 'Content-Type' => 'application/json' })
     stub_request(:post, 'https://api.occson.com/a/b/c.txt')
       .with(body: a_string_including('"force":"true"'))
       .to_return(status: 200,
-                 body: { message: 'Created', status: '200' }.to_json,
+                 body: { encrypted_content: 'U2FsdGVkX19zZWNyZXRfdDngaQw8zQbHado/FhnBIsQ=' }.to_json,
                  headers: { 'Content-Type' => 'application/json' })
   end
 

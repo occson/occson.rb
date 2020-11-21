@@ -8,7 +8,7 @@ RSpec.describe Ccs::Uploader do
   before do
     stub_request(:post, 'http://example.com/a/b/c.yml')
       .to_return(status: 201,
-                 body: { message: 'Created', status: '201' }.to_json,
+                 body: { path: '/a/b/c.yml' }.to_json,
                  headers: { 'Content-Type' => 'application/json' })
     stub_request(:post, 'http://example.com/a/b/c.yml')
       .with(headers: { 'Authorization' => 'Token token=open_token' })
@@ -23,7 +23,7 @@ RSpec.describe Ccs::Uploader do
     stub_request(:post, 'http://example.com/a/b/d.yml')
       .with(body: a_string_including('"force":"true"'))
       .to_return(status: 200,
-                 body: { message: 'Created', status: '200' }.to_json,
+                 body: { path: '/a/b/d.yml' }.to_json,
                  headers: { 'Content-Type' => 'application/json' })
   end
 
