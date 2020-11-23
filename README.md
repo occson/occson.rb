@@ -27,6 +27,7 @@ Or install it yourself as:
             --access-token
         -p CCS_PASSPHRASE,               CCS Passphrase
             --passphrase
+        -f, --[no-]force                 Overwrite remote documents when uploading
 
 
 ## Example
@@ -46,7 +47,7 @@ Upload local file
     ccs cp /local/path/to/file.yml ccs://workspace-name/0.1.0/path/to/file.yml
 
 Upload local file, overwriting remote document if any'
-    
+
     ccs cp --force /local/path/to/file.yml ccs://workspace-name/0.1.0/path/to/file.yml
 
 Upload content from STDIN
