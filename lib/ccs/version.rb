@@ -2,5 +2,5 @@
 
 module Ccs
   # Ccs gem version definition
-  VERSION = '3.0.0'
+  VERSION = '3.1.0'
 end
