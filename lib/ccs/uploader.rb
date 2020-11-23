@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module Ccs
+  # Encrypts and uploads the document to Occson.
   class Uploader
     # Constructs an Uploader instance from a given URI, content, access token and passphrase.
     #
