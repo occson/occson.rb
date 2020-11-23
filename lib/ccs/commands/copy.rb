@@ -12,7 +12,7 @@ module Ccs
     # - The Occson server: strings beginning with `ccs://` or `http(s)://` are interpreted as such
     #
     # - local files: everything not matching the previous descriptions is assumed to
-    #   be a path on the local systm
+    #   be a path on the local system
     class Copy
       # Builds an instance of the Copy command.
       #
