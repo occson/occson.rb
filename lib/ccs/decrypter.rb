@@ -10,13 +10,11 @@ module Ccs
     # Constructs a Decrypter instance with given passphrase and content.
     #
     # @example
-    #
     #   Ccs::Decrypter.new('the content passphrase', content)
     #  
     # @param passphrase [String] Passphrase for content decryption
     #
     # @param content [String] Encrypted document content
-    #
     def initialize(passphrase, content)
       @passphrase = passphrase
       @content = content

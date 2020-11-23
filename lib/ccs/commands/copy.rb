@@ -6,9 +6,12 @@ module Ccs
     # and decryption as necessary.
     #
     # The target and destinations can be:
-    # * STDIN/STDOUT: a `-` sign is interpreted as these standard streams
-    # * The Occson server: strings beginning with `ccs://` or `http(s)://` are interpreted as such
-    # * local files: everything not matching the previous descriptions is assumed to
+    #
+    # - STDIN/STDOUT: a `-` sign is interpreted as these standard streams
+    #
+    # - The Occson server: strings beginning with `ccs://` or `http(s)://` are interpreted as such
+    #
+    # - local files: everything not matching the previous descriptions is assumed to
     #   be a path on the local systm
     class Copy
       # Builds an instance of the Copy command.

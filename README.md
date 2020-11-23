@@ -6,9 +6,7 @@ Configuration control system
 
 Add this line to your application's Gemfile:
 
-```ruby
-gem 'ccs'
-```
+    gem 'ccs'
 
 And then execute:
 
