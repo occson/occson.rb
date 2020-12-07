@@ -1,9 +1,9 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-require 'bundler/setup'
+$LOAD_PATH.unshift("#{__dir__}/../lib")
+
 require 'ccs'
-require 'yaml'
 require 'optparse'
 require 'io/console'
 
