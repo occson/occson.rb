@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Ccs::Commands::Copy do
+RSpec.describe Occson::Commands::Copy do
   let(:application) { described_class.new source, destination, access_token, passphrase }
 
   subject { application }

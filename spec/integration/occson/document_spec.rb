@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-RSpec.describe Ccs::Document do
+RSpec.describe Occson::Document do
   let(:document) { described_class.new uri, access_token, passphrase }
 
   subject { document }
 
   let(:access_token) { 'access_token' }
   let(:passphrase) { 'passphrase' }
-  let(:uri) { 'ccs://a/b/c.txt' }
+  let(:uri) { 'occson://a/b/c.txt' }
 
   before do
     stub_request(:get, 'https://api.occson.com/a/b/c.txt')
@@ -26,17 +26,17 @@ RSpec.describe Ccs::Document do
   end
 
   describe '#upload' do
-    context 'with ccs scheme' do
+    context 'with occson scheme' do
       it { expect(subject.upload('content')).to eq true }
     end
 
-    context 'with ccs scheme and force' do
+    context 'with occson scheme and force' do
       it { expect(subject.upload('content', force: true)).to eq true }
     end
   end
 
   describe '#download' do
-    context 'with ccs scheme' do
+    context 'with occson scheme' do
       it { expect(subject.download).to eq 'content' }
     end
   end

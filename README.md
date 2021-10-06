@@ -1,12 +1,12 @@
-# CCS
+# OCCSON
 
-Configuration control system
+Store, manage and deploy configuration securely with Occson.
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
-    gem 'ccs'
+    gem 'occson'
 
 And then execute:
 
@@ -14,67 +14,68 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install ccs
+    $ gem install occson
 
 ## Usage
 
-    ccs cp [OPTIONS] <(LocalPath|STDIN)|(CCSUri|Uri)> <(CCSUri|Uri)|(LocalPath|STDOUT)>
+    occson cp [OPTIONS] <(LocalPath|STDIN)|(OccsonUri|Uri)> <(OccsonUri|Uri)|(LocalPath|STDOUT)>
 
     Options:
-        -a CCS_ACCESS_TOKEN,             CCS Access Token
+        -a OCCSON_ACCESS_TOKEN,             Occson access token
             --access-token
-        -p CCS_PASSPHRASE,               CCS Passphrase
+        -p OCCSON_PASSPHRASE,               Occson passphrase
             --passphrase
-        -f, --[no-]force                 Overwrite remote documents when uploading
+        -f, --[no-]force                    Overwrite remote documents when uploading
 
 
 ## Example
 
 Download to STDOUT
 
-    ccs cp ccs://workspace-name/0.1.0/path/to/file.yml -
-    ccs cp http://host.tld:9292/workspace-name/0.1.0/path/to/file.yml -
-    ccs cp https://host.tld/workspace-name/0.1.0/path/to/file.yml -
+    occson cp occson://0.1.0/path/to/file.yml -
+    occson cp https://api.occson.com/0.1.0/path/to/file.yml -
+    occson cp http://host.tld:9292/0.1.0/path/to/file.yml -
+    occson cp https://host.tld/0.1.0/path/to/file.yml -
 
 Download to local file
 
-    ccs cp ccs://workspace-name/0.1.0/path/to/file.yml /local/path/to/file.yml
+    occson cp occson://0.1.0/path/to/file.yml /local/path/to/file.yml
 
 Upload local file
 
-    ccs cp /local/path/to/file.yml ccs://workspace-name/0.1.0/path/to/file.yml
+    occson cp /local/path/to/file.yml occson://0.1.0/path/to/file.yml
 
 Upload local file, overwriting remote document if any'
 
-    ccs cp --force /local/path/to/file.yml ccs://workspace-name/0.1.0/path/to/file.yml
+    occson cp --force /local/path/to/file.yml occson://0.1.0/path/to/file.yml
 
 Upload content from STDIN
 
-    echo "{ a: 1 }" | ccs cp  - ccs://workspace-name/0.1.0/path/to/file.yml
-    cat /local/path/to/file.yml | ccs cp - ccs://workspace-name/0.1.0/path/to/file.yml
+    echo "{ a: 1 }" | occson cp  - occson://0.1.0/path/to/file.yml
+    cat /local/path/to/file.yml | occson cp - occson://0.1.0/path/to/file.yml
 
 ## API
 
 Upload
 
-    require 'ccs'
+    require 'occson'
 
-    destination = 'ccs://workspace-name/0.1.0/path/to/file.yml'
-    access_token = ENV.fetch('CCS_ACCESS_TOKEN')
+    destination = 'occson://0.1.0/path/to/file.yml'
+    access_token = ENV.fetch('OCCSON_ACCESS_TOKEN')
     passphrase = 'MyPassphrase'
     content = 'RAILS_ENV=production'
 
-    Ccs::Document.new(destination, access_token, passphrase).upload(content)
+    Occson::Document.new(destination, access_token, passphrase).upload(content)
 
 Download
 
-    require 'ccs'
+    require 'occson'
 
-    source = 'ccs://workspace-name/0.1.0/path/to/file.yml'
-    access_token = ENV.fetch('CCS_ACCESS_TOKEN')
+    source = 'occson://0.1.0/path/to/file.yml'
+    access_token = ENV.fetch('OCCSON_ACCESS_TOKEN')
     passphrase = 'MyPassphrase'
 
-    Ccs::Document.new(source, access_token, passphrase).download
+    Occson::Document.new(source, access_token, passphrase).download
 
 ## Development
 
@@ -91,7 +92,7 @@ Documentation for the code should be written in YARD format. It can be generated
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/occson/ccs. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/occson/occson.rb. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 
 ## License

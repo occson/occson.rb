@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Ccs
-  # Ccs gem version definition
+module Occson
+  # Occson gem version definition
   VERSION = '3.1.1'
 end

@@ -11,4 +11,4 @@ Style/Documentation:
 Metrics/BlockLength:
   Exclude:
     - spec/**/*.rb
-    - ccs.gemspec
+    - occson.gemspec

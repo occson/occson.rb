@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Ccs
+module Occson
   module Commands
     # The copy command, responsible for copying a target to a destination, performing encryption
     # and decryption as necessary.
@@ -9,7 +9,7 @@ module Ccs
     #
     # - STDIN/STDOUT: a `-` sign is interpreted as these standard streams
     #
-    # - The Occson server: strings beginning with `ccs://` or `http(s)://` are interpreted as such
+    # - The Occson server: strings beginning with `occson://` or `http(s)://` are interpreted as such
     #
     # - local files: everything not matching the previous descriptions is assumed to
     #   be a path on the local system
@@ -40,7 +40,7 @@ module Ccs
       private
 
       def download?
-        @source.match?(%r{\A(ccs|https?):\/\/})
+        @source.match?(%r{\A(occson|https?):\/\/})
       end
 
       def download

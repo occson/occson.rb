@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ccs (3.1.1)
+    occson (3.1.1)
 
 GEM
   remote: https://rubygems.org/
@@ -97,8 +97,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  ccs!
   inch (~> 0.8.0)
+  occson!
   pry (~> 0.11.3)
   rake (~> 13.0.1)
   reek (~> 4.7.3)

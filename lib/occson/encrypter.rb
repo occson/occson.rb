@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Ccs
+module Occson
   # Encrypts the given content for transmission. Uses AES-256 in CBC
   # mode internally, with salting.
   class Encrypter
@@ -12,7 +12,7 @@ module Ccs
     #   content = 'very secret content'
     #   salt = '12345678'
     #
-    #   Ccs::Encrypter.new(passphrase, content, salt)
+    #   Occson::Encrypter.new(passphrase, content, salt)
     #
     # @param passphrase [String] Document passphrase.
     # @param content [String] Plaintext content to be encrypted.
