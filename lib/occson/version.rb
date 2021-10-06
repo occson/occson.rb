@@ -2,5 +2,5 @@
 
 module Occson
   # Occson gem version definition
-  VERSION = '3.1.1'
+  VERSION = '4.0.0'
 end
