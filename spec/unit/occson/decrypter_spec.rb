@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Ccs::Decrypter do
+RSpec.describe Occson::Decrypter do
   let(:decrypter) { described_class.new passphrase, content }
 
   subject { decrypter }

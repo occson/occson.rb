@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Ccs
+module Occson
   # Handles client-side decryption for documents.
   #
   # The decrypter uses AES-256 in CBC mode internally. A salt is
@@ -10,7 +10,7 @@ module Ccs
     # Constructs a Decrypter instance with given passphrase and content.
     #
     # @example
-    #   Ccs::Decrypter.new('the content passphrase', content)
+    #   Occson::Decrypter.new('the content passphrase', content)
     #  
     # @param passphrase [String] Passphrase for content decryption
     # @param content [String] Encrypted document content

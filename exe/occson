@@ -1,0 +1,91 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+$LOAD_PATH.unshift("#{__dir__}/../lib")
+
+require 'occson'
+require 'optparse'
+require 'io/console'
+
+options = {
+  'access_token' => ENV['OCCSON_ACCESS_TOKEN'],
+  'passphrase' => ENV['OCCSON_PASSPHRASE']
+}
+
+option_parser = OptionParser.new do |option_parser|
+  option_parser.banner = 'Usage: occson [COMMAND [OPTIONS]]'
+
+  option_parser.separator ''
+  option_parser.separator 'Store, manage and deploy configuration securely with Occson.'
+  option_parser.separator ''
+  option_parser.separator 'Commands:'
+  option_parser.separator '    cp                               Copy'
+
+  option_parser.separator ''
+  option_parser.separator format('Version: %<version>s', version: Occson::VERSION)
+end
+
+case ARGV.shift
+when 'cp'
+  option_parser = OptionParser.new do |option_parser|
+    option_parser.banner = 'Usage: occson cp [OPTIONS] <(LocalPath|STDIN)|(OccsonUri|Uri)> <(OccsonUri|Uri)|(LocalPath|STDOUT)>'
+    option_parser.separator ''
+    option_parser.separator 'Store, manage and deploy configuration securely with Occson.'
+    option_parser.separator ''
+    option_parser.separator 'Options:'
+
+    option_parser.on('-a OCCSON_ACCESS_TOKEN', '--access-token OCCSON_ACCESS_TOKEN', String, 'Occson access token') do |v|
+      options['access_token'] = v
+    end
+
+    option_parser.on('-p OCCSON_PASSPHRASE', '--passphrase OCCSON_PASSPHRASE', String, 'Occson passphrase') do |v|
+      options['passphrase'] = v
+    end
+
+    option_parser.on('-f', '--[no-]force', 'Overwrite remote documents when uploading') do |v|
+      options['force'] = v
+    end
+
+    option_parser.separator ''
+    option_parser.separator 'Configure via environment variables:'
+    option_parser.separator '  OCCSON_ACCESS_TOKEN'
+    option_parser.separator '  OCCSON_PASSPHRASE'
+
+    option_parser.separator ''
+    option_parser.separator 'Examples:'
+    option_parser.separator '  Download to STDOUT'
+    option_parser.separator '    occson cp occson://0.1.0/path/to/file.yml -'
+    option_parser.separator '    occson cp https://api.occson.com/0.1.0/path/to/file.yml -'
+    option_parser.separator '    occson cp http://host.tld:9292/0.1.0/path/to/file.yml -'
+    option_parser.separator '    occson cp https://host.tld/0.1.0/path/to/file.yml -'
+    option_parser.separator '  Download to local file'
+    option_parser.separator '    occson cp occson://0.1.0/path/to/file.yml /local/path/to/file.yml'
+    option_parser.separator '  Upload local file'
+    option_parser.separator '    occson cp /local/path/to/file.yml occson://0.1.0/path/to/file.yml'
+    option_parser.separator '  Upload local file, overwriting remote document if any'
+    option_parser.separator '    occson cp --force /local/path/to/file.yml occson://0.1.0/path/to/file.yml'
+    option_parser.separator '  Upload content from STDIN'
+    option_parser.separator '    echo "{ a: 1 }" | occson cp  - occson://0.1.0/path/to/file.yml'
+    option_parser.separator '    cat /local/path/to/file.yml | occson cp - occson://0.1.0/path/to/file.yml'
+    option_parser.separator ''
+
+    option_parser.separator format('Version: %<version>s', version: Occson::VERSION)
+  end
+
+  arguments = option_parser.parse!
+
+  unless options.values.any?
+    puts option_parser
+    exit(1)
+  end
+
+  raise OptionParser::MissingArgument, 'access_token' unless options['access_token']
+  raise OptionParser::MissingArgument, 'passphrase' unless options['passphrase']
+  raise OptionParser::MissingArgument, 'source' unless arguments.fetch(0, nil)
+  raise OptionParser::MissingArgument, 'destination' unless arguments.fetch(1, nil)
+
+  exit(1) unless Occson::Commands::Copy.new(arguments[0], arguments[1], options['access_token'], options['passphrase'], force: options.fetch('force', false)).call
+else
+  puts option_parser
+  exit(1)
+end

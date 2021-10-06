@@ -15,6 +15,6 @@ if %w[1 true].include?(ENV['COVERAGE'])
     add_filter '/spec/'
   end
 end
-require 'ccs'
+require 'occson'
 
 Dir[File.join(__dir__, 'support/**/*.rb')].each { |f| require f }

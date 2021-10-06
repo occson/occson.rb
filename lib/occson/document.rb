@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Ccs
+module Occson
   # An abstraction for the Document concept. Simplifies building URLs,
   # uploading and downloading contents. Abstracts away workspaces due to
   # the use of access tokens in constructions.
@@ -8,13 +8,13 @@ module Ccs
     # Constructs a Document instance from a given URI, access token and passphrase.
     #
     # @example
-    #    uri = 'ccs://path/to/file.yml'
+    #    uri = 'occson://path/to/file.yml'
     #    access_token = 'f30b5450421362c9ca0b'
     #    passphrase = 'my document passphrase'
     #
-    #    Ccs::Document.new(uri, access_token, passphrase)
+    #    Occson::Document.new(uri, access_token, passphrase)
     #
-    # @param uri [String] Document URI. Accepts `ccs://` as shorthand for Occson location.
+    # @param uri [String] Document URI. Accepts `occson://` as shorthand for Occson location.
     # @param access_token [String] Occson access token.
     # @param passphrase [String] Document passphrase, used in encryption and decryption.
     def initialize(uri, access_token, passphrase)
@@ -48,7 +48,7 @@ module Ccs
     private
 
     def build_uri(uri)
-      URI uri.sub('ccs://', 'https://api.occson.com/')
+      URI uri.sub('occson://', 'https://api.occson.com/')
     end
   end
 end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Ccs::Downloader do
+RSpec.describe Occson::Downloader do
   let(:downloader) { described_class.new uri, access_token, passphrase }
 
   subject { downloader }

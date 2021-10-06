@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Ccs::Uploader do
+RSpec.describe Occson::Uploader do
   let(:uploader) { described_class.new uri, content, access_token, passphrase, force: force }
 
   subject { uploader }

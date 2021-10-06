@@ -1,19 +1,19 @@
 # frozen_string_literal: true
 
-module Ccs
+module Occson
   # Encrypts and uploads the document to Occson.
   class Uploader
     # Constructs an Uploader instance from a given URI, content, access token and passphrase.
     #
     # @example
-    #    uri = 'ccs://path/to/file.yml'
+    #    uri = 'occson://path/to/file.yml'
     #    content = 'my very secret message'
     #    access_token = 'f30b5450421362c9ca0b'
     #    passphrase = 'my document passphrase'
     #
-    #    Ccs::Uploader.new(uri, access_token, passphrase)
+    #    Occson::Uploader.new(uri, access_token, passphrase)
     #
-    # @param uri [String] Document URI. Accepts `ccs://` as shorthand for Occson location.
+    # @param uri [String] Document URI. Accepts `occson://` as shorthand for Occson location.
     # @param content [String] Plaintext for encryption and upload.
     # @param access_token [String] Occson access token.
     # @param passphrase [String] Document passphrase, used in encryption and decryption.
@@ -44,7 +44,7 @@ module Ccs
 
     def request
       @request ||= Net::HTTP::Post.new(@uri.path, headers).tap do |request|
-        request["User-Agent"] = format('ccs/%s', Ccs::VERSION)
+        request["User-Agent"] = format('occson/%s', Occson::VERSION)
       end
     end
 
