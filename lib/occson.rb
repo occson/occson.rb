@@ -14,6 +14,7 @@ require 'occson/downloader'
 require 'occson/document'
 
 require 'occson/commands/copy'
+require 'occson/commands/run'
 
 # Top level `Occson` namespace.
 module Occson; end
