@@ -109,8 +109,8 @@ when 'run'
 
     option_parser.separator ''
     option_parser.separator 'Examples:'
-    option_parser.separator '  Print environment variables'
-    option_parser.separator '    occson run occson://0.1.0/path/to/file.yml -- printenv'
+    option_parser.separator '  Run command with downloaded environment variables'
+    option_parser.separator '    occson run occson://0.1.0/.env -- printenv'
     option_parser.separator ''
 
     option_parser.separator format('Version: %<version>s', version: Occson::VERSION)

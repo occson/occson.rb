@@ -28,6 +28,15 @@ Or install it yourself as:
         -f, --[no-]force                    Overwrite remote documents when uploading
 
 
+    occson run [OPTIONS] <OccsonUri> -- <Command>
+
+    Options:
+        -a OCCSON_ACCESS_TOKEN,             Occson access token
+            --access-token
+        -p OCCSON_PASSPHRASE,               Occson passphrase
+            --passphrase
+
+
 ## Example
 
 Download to STDOUT
@@ -53,6 +62,10 @@ Upload content from STDIN
 
     echo "{ a: 1 }" | occson cp  - occson://0.1.0/path/to/file.yml
     cat /local/path/to/file.yml | occson cp - occson://0.1.0/path/to/file.yml
+
+Run command with downloaded environment variables
+
+    occson run occson://0.1.0/.env -- printenv
 
 ## API
 
