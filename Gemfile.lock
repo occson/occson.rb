@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    occson (4.0.0)
+    occson (4.1.0)
 
 GEM
   remote: https://rubygems.org/

@@ -1,3 +1,12 @@
+## 4.1.0 2022-02-06
+
+### Added
+
+- run command
+
+[Compare 4.0.0...4.1.0](https://github.com/occson/occson.rb/compare/4.0.0...4.1.0)
+
+
 ## 4.0.0 2021-10-06
 
 ### Changed
