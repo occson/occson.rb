@@ -1,3 +1,18 @@
+## 4.1.1 2023-02-09
+
+### Upgraded
+
+- rubocop
+- reek
+- pry
+- rspec
+- simplecov
+- yard
+- webmock
+- rake
+
+[Compare 4.1.0...4.1.1](https://github.com/occson/occson.rb/compare/4.1.0...4.1.1)
+
 ## 4.1.0 2022-02-06
 
 ### Added
