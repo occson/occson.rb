@@ -6,6 +6,7 @@ require 'occson/version'
 
 Gem::Specification.new do |spec|
   spec.name = 'occson'
+  spec.required_ruby_version = '>= 2.7.0'
   spec.version = Occson::VERSION
   spec.authors = ['tkowalewski', 'paweljw']
   spec.email = ['me@tkowalewski.pl', 'p@steamshard.net']
