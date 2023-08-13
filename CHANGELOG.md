@@ -1,3 +1,16 @@
+## 4.2.0 2023-08-13
+
+### Upgraded
+
+- rubocop
+- yard
+
+### Dropped support for ruby 2.6
+
+### Resolved rubocop issues
+
+[Compare 4.1.1...4.2.0](https://github.com/occson/occson.rb/compare/4.1.1...4.2.0)
+
 ## 4.1.1 2023-02-09
 
 ### Upgraded
