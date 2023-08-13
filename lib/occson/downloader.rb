@@ -30,6 +30,7 @@ module Occson
       response = http.request(request)
       body = response.body
       return unless response.code.eql? '200'
+
       json = JSON.parse body
 
       Decrypter.new(@passphrase, json['encrypted_content']).call
@@ -45,7 +46,7 @@ module Occson
 
     def request
       Net::HTTP::Get.new(@uri.path, headers).tap do |request|
-        request["User-Agent"] = format('occson/%s', Occson::VERSION)
+        request['User-Agent'] = format('occson/%s', Occson::VERSION)
       end
     end
 

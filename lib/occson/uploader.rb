@@ -44,7 +44,7 @@ module Occson
 
     def request
       @request ||= Net::HTTP::Post.new(@uri.path, headers).tap do |request|
-        request["User-Agent"] = format('occson/%s', Occson::VERSION)
+        request['User-Agent'] = format('occson/%s', Occson::VERSION)
       end
     end
 

@@ -18,10 +18,10 @@ module Occson
         parsed_content = content.split("\n").map do |line|
           next if line.start_with?('#')
 
-          line.split("=", 2) # @TODO handle wrapped values
+          line.split('=', 2) # @TODO handle wrapped values
         end.compact
 
-        envs = Hash[parsed_content]
+        envs = parsed_content.to_h
 
         system(envs, @command, *@arguments)
       end

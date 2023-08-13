@@ -32,14 +32,14 @@ module Occson
       encrypted = encryptor.update(@content)
       encrypted << encryptor.final
 
-      openssl_salted_ciphertext = 'Salted__' + @salt + encrypted
+      openssl_salted_ciphertext = format('Salted__%<salt>s%<content>s', salt: @salt, content: encrypted)
       Base64.strict_encode64(openssl_salted_ciphertext)
     end
 
     private
 
     def encryptor
-      @encryptor ||= OpenSSL::Cipher::AES.new(256, :CBC).encrypt
+      @encryptor ||= OpenSSL::Cipher.new('aes-256-cbc').encrypt
     end
   end
 end

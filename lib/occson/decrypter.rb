@@ -11,7 +11,7 @@ module Occson
     #
     # @example
     #   Occson::Decrypter.new('the content passphrase', content)
-    #  
+    #
     # @param passphrase [String] Passphrase for content decryption
     # @param content [String] Encrypted document content
     def initialize(passphrase, content)
@@ -31,7 +31,7 @@ module Occson
     private
 
     def decryptor
-      @decryptor ||= OpenSSL::Cipher::AES.new(256, :CBC).decrypt
+      @decryptor ||= OpenSSL::Cipher.new('aes-256-cbc').decrypt
     end
 
     def openssl_salted_ciphertext
@@ -43,7 +43,7 @@ module Occson
     end
 
     def encrypted
-      openssl_salted_ciphertext[16..-1]
+      openssl_salted_ciphertext[16..]
     end
   end
 end

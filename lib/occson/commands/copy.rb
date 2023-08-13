@@ -40,18 +40,18 @@ module Occson
       private
 
       def download?
-        @source.match?(%r{\A(occson|https?):\/\/})
+        @source.match?(%r{\A(occson|https?)://})
       end
 
       def download
         content = Document.new(@source, @access_token, @passphrase).download
         return unless content
 
-        (@destination.eql?('-') ? STDOUT : File.new(@destination, 'w')).print content
+        (@destination.eql?('-') ? $stdout : File.new(@destination, 'w')).print content
       end
 
       def upload
-        content = @source.eql?('-') ? STDIN.read : File.read(@source)
+        content = @source.eql?('-') ? $stdin.read : File.read(@source)
         Document.new(@destination, @access_token, @passphrase).upload(content, force: @force)
       end
     end
