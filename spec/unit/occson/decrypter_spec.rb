@@ -7,7 +7,7 @@ RSpec.describe Occson::Decrypter do
 
   describe '#call' do
     let(:passphrase) { 'passphrase' }
-    let(:content) { 'U2FsdGVkX19zZWNyZXRfdDngaQw8zQbHado/FhnBIsQ='}
+    let(:content) { 'U2FsdGVkX19zZWNyZXRfdDngaQw8zQbHado/FhnBIsQ=' }
 
     it { expect(subject.call).to eq 'content' }
   end

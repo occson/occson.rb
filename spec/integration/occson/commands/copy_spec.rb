@@ -48,7 +48,7 @@ RSpec.describe Occson::Commands::Copy do
       let(:destination) { 'http://example.com/a/b/c.txt' }
 
       context 'from STDIN' do
-        before { STDIN = StringIO.new('content') }
+        before { STDIN = StringIO.new('content') } # rubocop:disable Lint/ConstantDefinitionInBlock
         let(:source) { '-' }
 
         it { expect(subject.call).to eq true }
